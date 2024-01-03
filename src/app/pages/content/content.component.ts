@@ -20,21 +20,16 @@ export class ContentComponent {
   @Input() title: string = ''
   @Input() text: string = ''
   @Input() imagePath: string = ''
-
-  routeId: string | null = "0"
-  article: articleType = {
-    id: 0,
-    pathImage: "",
-    articleTitle: "",
-    articleDate: "",
-    smallContent: ""
-  }
+  
+  loading: boolean = true
+  routeId: number  = 0
+  article: articleType = Articles[this.routeId]
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(
       value => {
-        this.routeId = value.get('id')
-        this.article = Articles[this.article.id]
+        this.routeId = Number(value.get('id'))
+        this.article = Articles[this.routeId]
       }
     )
   }
